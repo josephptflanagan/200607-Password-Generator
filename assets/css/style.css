@@ -164,14 +164,6 @@ align-items: center;
   background-color: var(--secondary-color);
 }
 
-/*.card-footer::before {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: #e7e9eb;
-  height: 2px;
-}*/
-
 .card-footer::after {
   content: " ";
   display: block;
@@ -225,8 +217,13 @@ button[disabled] {
 }
 
 @media (max-width: 690px) {
+
+h1{
+  margin: auto;
+}
+
   .btn {
-    font-size: 1rem;
+    font-size: 20px;
     margin: 16px 0px 0px 0px;
     padding: 10px 15px;
   }
@@ -234,10 +231,30 @@ button[disabled] {
   #password {
     font-size: 1rem;
   }
+
+  ul li{
+    background-color: var(--secondary-color);
+    color: white;
+    display: inline-block;
+    align-content: center;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding:20px;
+    font-size: 20px;
+    margin: 10px;
+    width: 80%;
+    text-align: center;
+  }
+
+  .char-check-box{
+    width:20px;
+    height: 20px;
+    }
+
 }
 
 @media (max-width: 500px) {
   .btn {
-    font-size: 0.8rem;
+    font-size: 20px;
   }
 }
