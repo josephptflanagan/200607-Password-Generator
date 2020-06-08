@@ -13,25 +13,37 @@
         <h1>Password Generator</h1>
       </header>
       <div class="card">
-        <div class="card-header">
-          <h2>Generate a Password</h2>
-        </div>
-        <div class="card-body">
           <div class="slidecontainer">
-            <p style="text-align: center;">Choose Your Desired Character Count, from 8 to 128</p>
-            <input type="range" min="8" max="128" value = "64" class="slider" id="charCount">
-            <p id="sliderReadout" style="text-align: center;"> Character</p>
+            <p class="card-heading">Character Count <br> 8 to 128 Accepted</p>
+            <p id="sliderReadout" class="char-slider-text"></p>
+            <input type="range" min="8" max="128" value = "68" class="slider" id="charCount">
           </div>
-          <p style="text-align: center;">Character Types (At Least One Must Be Checked)</p>
+      </div>
+      <div class="card">
           <div>
-            Lower Case: <input type="checkbox" id="lowerCase" onclick="lowerCaseFunction()" style="display: inline-block; margin-right: 15px;">
-            Upper Case: <input type="checkbox" id="upperCase" onclick="upperCaseFunction()" style="display: inline-block;margin-right: 15px;">
-            Numerals: <input type="checkbox" id="numerals" onclick="numeralFunction()" style="display: inline-block;margin-right: 15px;">
-            Special Characters: <input type="checkbox" id="specialChar" onclick="specialCharFunction()" style="display: inline-block;margin-right: 15px;">
+            <p class="card-heading">Character Types</p>
+          </div>
+          <div>
+            <ul>
+              <li>
+                Lower Case <input type="checkbox" id="lowerCase" onclick="lowerCaseFunction()" class="char-check-box">
+              </li>
+              <li>
+                Upper Case <input type="checkbox" id="upperCase" onclick="upperCaseFunction()" class="char-check-box">
+              </li>
+              <li>  
+                Numerals <input type="checkbox" id="numerals" onclick="numeralFunction()" class="char-check-box">
+              </li>
+              <li>
+                Special Characters <input type="checkbox" id="specialChar" onclick="specialCharFunction()" class="char-check-box">
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
+        <div class="card">
+          <div class="card-footer">
+            <button id="generate" class="btn">Generate Password</button>
+          </div>
         </div>
       </div>
     </div>

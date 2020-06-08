@@ -1,5 +1,5 @@
 // Assignment code here
-var charQuantity = 64;
+var charQuantity = 68;
 var lowerCaseChars = false;
 var upperCaseChars = false;
 var numeralChars = false;
