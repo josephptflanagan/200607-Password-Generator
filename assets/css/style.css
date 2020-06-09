@@ -81,6 +81,7 @@ header {
 
 .card-body {
   min-height: 100px;
+  background-color: var(--secondary-color);
 }
 
 .slidecontainer{
@@ -135,29 +136,25 @@ header {
 
 }
 
-ul{
-  background-color: var(--secondary-color);
-}
-
-ul li{
-  background-color: var(--secondary-color);
+.charButton{
   color: white;
   display: inline-block;
-  align-content: center;
+  background-color: var(--secondary-color);
   border: 2px solid white;
   border-radius: 10px;
   padding:20px;
   font-size: 25px;
-  margin: 10px;
-  width: 45%;
+  margin: 10px auto 0 auto;
+  width: 100%;
   text-align: center;
 }
 
-.char-check-box{
-width:25px;
-height: 25px;
-align-items: center;
+.charButton:hover{
+  color: black;
+  background-color: #c6ffb3;
+  transition-duration: .4s;
 }
+
 
 .card-footer {
   text-align: center;
@@ -237,28 +234,7 @@ button[disabled] {
     font-size: 1rem;
   }
   
-  ul{
-    padding-left: 0px;
-  }
 
-  ul li{
-    background-color: var(--secondary-color);
-    color: white;
-    display: inline-block;
-    align-content: left;
-    border: 2px solid white;
-    border-radius: 10px;
-    padding:20px 0 20px 0;
-    font-size: 20px;
-    margin: 10px 0 10px 0;
-    width: 100%;
-    text-align: center;
-  }
-
-  .char-check-box{
-    width:20px;
-    height: 20px;
-    }
 
 }
 

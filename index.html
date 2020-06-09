@@ -23,21 +23,14 @@
           <div>
             <p class="card-heading">Character Types</p>
           </div>
-          <div>
-            <ul>
-              <li>
-                Lower Case <input type="checkbox" id="lowerCase" onclick="lowerCaseFunction()" class="char-check-box">
-              </li>
-              <li>
-                Upper Case <input type="checkbox" id="upperCase" onclick="upperCaseFunction()" class="char-check-box">
-              </li>
-              <li>  
-                Numerals <input type="checkbox" id="numerals" onclick="numeralFunction()" class="char-check-box">
-              </li>
-              <li>
-                Special Characters <input type="checkbox" id="specialChar" onclick="specialCharFunction()" class="char-check-box">
-              </li>
-            </ul>
+          <div class="card-body">
+                <button id="lowerCase" class="charButton" onclick="lowerCaseFunction()">Lower Case</button>
+
+                <button id="upperCase" class="charButton" onclick="upperCaseFunction()">Upper Case</button>
+
+                <button id="numeral" class="charButton" onclick="numeralFunction()">Numerals</button>
+
+                <button id="specialChar" class="charButton" onclick="specialCharFunction()">Special Characters</button>
           </div>
         </div>
         <div class="card">

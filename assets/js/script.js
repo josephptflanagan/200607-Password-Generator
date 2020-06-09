@@ -25,56 +25,77 @@ var buttonColor = function(){
 
 }
 
-lowerCaseFunction = function(){
-  var checkBox = document.getElementById("lowerCase");
+var charButtonColor = function(state, buttonID){
+  
+  if(state){
+    document.getElementById(buttonID).style.background = "rgb(140, 255, 102)";
+    document.getElementById(buttonID).style.color = "rgb(0, 0, 0)";
+  }
+  else{
+    document.getElementById(buttonID).style.background = "rgb(20, 20, 57)";
+    document.getElementById(buttonID).style.color = "rgb(255, 255, 255)";
+  }
+}
 
-  if (checkBox.checked == true){
+lowerCaseFunction = function(){
+
+  if (lowerCaseChars == false){
     lowerCaseChars = true;
+    charButtonColor(lowerCaseChars, "lowerCase");
   }
   else{
     lowerCaseChars = false;
+    charButtonColor(lowerCaseChars, "lowerCase");
   }
+  
   buttonColor();
   console.log("lowerCaseChars: " + lowerCaseChars)
 }
 
 upperCaseFunction = function(){
-  var checkBox = document.getElementById("upperCase");
-  if (checkBox.checked == true){
+
+  if (upperCaseChars == false){
     upperCaseChars = true;
+    charButtonColor(upperCaseChars, "upperCase");
   }
   else{
     upperCaseChars = false;
+    charButtonColor(upperCaseChars, "upperCase");
   }
+  
   buttonColor();
   console.log("upperCaseChars: " + upperCaseChars)
 }
 
 numeralFunction = function(){
-  var checkBox = document.getElementById("numerals");
-  if (checkBox.checked == true){
+  
+  if (numeralChars == false){
     numeralChars = true;
+    charButtonColor(numeralChars, "numeral");
   }
   else{
     numeralChars = false;
+    charButtonColor(numeralChars, "numeral");
   }
+
   buttonColor();
   console.log("numeralChars: " + numeralChars)
 }
 
 specialCharFunction = function(){
-  var checkBox = document.getElementById("specialChar");
-  if (checkBox.checked == true){
+  
+  if (specialChars == false){
     specialChars = true;
+    charButtonColor(specialChars, "specialChar");
   }
   else{
     specialChars = false;
+    charButtonColor(specialChars, "specialChar");
   }
+
   buttonColor();
   console.log("specialChars: " + specialChars)
 }
-
-
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
