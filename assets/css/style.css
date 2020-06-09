@@ -217,9 +217,14 @@ button[disabled] {
 }
 
 @media (max-width: 690px) {
+  header{
+    padding:0 0 5px 0;
+  }
 
-h1{
+  h1{
+  padding: 30px 40px;
   margin: auto;
+  font-size: 48px;
 }
 
   .btn {
@@ -231,18 +236,22 @@ h1{
   #password {
     font-size: 1rem;
   }
+  
+  ul{
+    padding-left: 0px;
+  }
 
   ul li{
     background-color: var(--secondary-color);
     color: white;
     display: inline-block;
-    align-content: center;
+    align-content: left;
     border: 2px solid white;
     border-radius: 10px;
-    padding:20px;
+    padding:20px 0 20px 0;
     font-size: 20px;
-    margin: 10px;
-    width: 80%;
+    margin: 10px 0 10px 0;
+    width: 100%;
     text-align: center;
   }
 
