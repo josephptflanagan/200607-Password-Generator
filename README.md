@@ -6,6 +6,9 @@ https://github.com/josephptflanagan/200607-Password-Generator
 ## Site URL
 https://josephptflanagan.github.io/200607-Password-Generator/
 
+## Screenshot
+
+
 ### I didn't quite follow the exact instructions:
 As stated above, I kind of went my own way on this, and I hope that's not a big deal. I made this a single page interface rather than a series of prompts because I wanted to get better with CSS. This is still fully capable of generating an 8-128 character password with lower case, upper case, numeric and special characters, I just used a slider for the character count and buttons for the character types.
 
@@ -32,6 +35,6 @@ As stated above, I kind of went my own way on this, and I hope that's not a big 
 
 10. This function is passed the object that will provide the character for the password. A new random number generator then generates an index that corresponds to specific characters of the passed object. The object then updates the number of times it has been used, so as to allow the influence function to work properly. The chosen character is passed back to charChoice, and finally back to generatePassword.
 
-11. Repeat steps 5-10 as many times as is required to meet the chosen character count. This string is then passed back to writePassword, where is passes into a prompt to be read/copied by the user. 
+11. Repeat steps 5-11 as many times as is required to meet the chosen character count. This string is then passed back to writePassword, where is passes into a prompt to be read/copied by the user. 
 
 12. the reset function is then called, reseting object attributes and HTML elements so that the program can run again.
