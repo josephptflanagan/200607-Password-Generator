@@ -7,7 +7,7 @@ https://github.com/josephptflanagan/200607-Password-Generator
 https://josephptflanagan.github.io/200607-Password-Generator/
 
 ## Screenshot
-
+https://github.com/josephptflanagan/200607-Password-Generator/blob/master/assets/img/screenshot.jpg
 
 ### I didn't quite follow the exact instructions:
 As stated above, I kind of went my own way on this, and I hope that's not a big deal. I made this a single page interface rather than a series of prompts because I wanted to get better with CSS. This is still fully capable of generating an 8-128 character password with lower case, upper case, numeric and special characters, I just used a slider for the character count and buttons for the character types.
