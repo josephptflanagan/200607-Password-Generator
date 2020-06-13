@@ -58,9 +58,6 @@ slider.oninput = function(){
   output.innerHTML = this.value;
 };
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
 var generateButtonColor = function(){
 
   if (lowerCase.numBool === 0 && upperCase.numBool === 0 && numeral.numBool === 0 && special.numBool === 0){
@@ -143,7 +140,7 @@ var randomChar = function(typeInitial){
 var charAvailability = function(){
   //alert("Entered charAvailability");
   localSum = 0;
-  for(i=0;i<objArray.length;i++){
+  for(var i = 0;i < objArray.length;i++){
     localSum += objArray[i].numBool * objArray[i].bankLength;
   }
   //alert("charAvailability localSum: " + localSum);
@@ -151,11 +148,12 @@ var charAvailability = function(){
 
 };
 
+//provides values to influence random index generation, increase likelyhood of password to have char variety proportial to number of chars per type.
 var influenceFunction = function(desired, charsRemaining){
   
   localInfluenceArray = [];
   
-  for(i = 0;i < objArray.length;i++){
+  for(var i = 0;i < objArray.length;i++){
     console.log("i: " + i + ", objArray[i].numBool: " + objArray[i].numBool);
     if(objArray[i].numBool === 1){
       localInfluenceArray.push((desired[i] - objArray[i].inUse)/charsRemaining);
@@ -165,11 +163,15 @@ var influenceFunction = function(desired, charsRemaining){
       //alert("charsRemaining: " + charsRemaining);
       //alert("Influence localInfluenceArray @ index " + i + ": " + (desired[i] - objArray[i].inUse)/charsRemaining);
     }
+    else{
+      localInfluenceArray.push(null);
+    }
   }
 
   return localInfluenceArray;
 };
 
+//determines the proper number of char types based on their proportion to the total bank of chars
 var desiredProportions = function(){
   //alert("Entered desiredProportions");
   var localArray = [];
@@ -179,6 +181,9 @@ var desiredProportions = function(){
     if(objArray[i].numBool === 1){
       localArray.push(Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
       console.log("desiredProportions localArray @ index " + i + ": " + Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
+    }
+    else{
+      localArray.push(null);
     }
   }
 
@@ -216,47 +221,43 @@ var minMaxFunction = function(charsRemaining){
       localMinMaxArray.push(null);
     }
   }
-  for(i = 0;i < localMinMaxArray.length;i++){
+  for(var i = 0;i < localMinMaxArray.length;i++){
     console.log(localMinMaxArray[i]);
   }
   return localMinMaxArray;
 };
 
+//picks the actual char from the specified bank of chars
 var specificChar = function(localObj){
-  //console.log("accessed specificChar");
-  //console.log("localObj:" + localObj.buttonID);
-  //console.log("localObj.bankLength:" + localObj.bankLength);
+
   var tempIndex = Math.floor(Math.random() * localObj.bankLength);
-  console.log("tempIndex:" + tempIndex);
   var char = localObj.charBank[tempIndex];
-  console.log("localObj.charBank[tempIndex]:" + localObj.charBank[tempIndex]);
-  console.log("localObj.inUse: " + localObj.inUse)
   localObj.inUse += 1;
-  console.log("localObj.inUse: " + localObj.inUse)
+
   return char;
 };
 
 //using predetermined mins, maxes, and an index, find and return a specific char to add to the password
 var charChoice = function(charsRemaining){
-  //alert("charChoice Entered, charsRemaining: " + charsRemaining);
+
   var char = "";
   var minMax = minMaxFunction(charsRemaining);
   var max = 0;
 
-  for(i=minMax.length-1;i>-1;i--){
+  for(var i = minMax.length-1;i > -1;i--){
     if (minMax[i] != null){
-      //console.log("minMax[i]:" + minMax[i])
+
       if (minMax[i]>max){
         max = minMax[i]
       }
     }
     else{
-      //alert("minMax at i: " + i);
+
     }
   }
-  //alert("charChoice max: " + max);
+
   var index = Math.floor((Math.random() * max) + 1);
-  //alert("charChoice index: " + index);
+
 
   if(index >= minMax[0] && index <= minMax[1]){ //lowerCase
     char = specificChar(lowerCase);
@@ -278,11 +279,11 @@ var charChoice = function(charsRemaining){
 
 }
 var generatePassword = function(){
-  //alert("Generate Password Entered");
+
   var generatedPassword = "";
   
   var charsRemaining = charQuantity;
-  //alert("charsRemaining: " + charQuantity);
+
 
   for(var i = 0;i < charQuantity;i++){
     
@@ -292,13 +293,20 @@ var generatePassword = function(){
       alert("going past allowance");
       alert("generatePassword for loop i: " + i);
     }
-    //alert("password generation index: " + i);
     generatedPassword += charChoice(charsRemaining);
-    //alert("password as is: " + generatedPassword);
     charsRemaining--;
   }
   return generatedPassword;
-}
+};
+
+var reset = function(){
+  for(var i = 0; i < objArray.length;i++){
+    objArray[i].inUse = 0;
+    objArray[i].numBool = 0;
+    charButtonColor(objArray[i].numBool, objArray[i].buttonID);
+  }
+  window.location.reload();
+};
 
 // Write password to the #password input
 function writePassword() {
@@ -307,6 +315,8 @@ function writePassword() {
   //var passwordText = document.querySelector("#password");
   alert("Password: " + password);
   //passwordText.value = password;
+  reset();
+  
 
 }
 
