@@ -1,4 +1,4 @@
-// Assignment code here
+//starting point for charQuantity slider
 var charQuantity = 68;
 
 var lowerCase = {
@@ -6,10 +6,7 @@ var lowerCase = {
   charBank : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
   bankLength : 26,
   inUse : 0,
-  buttonID : "lowerCase",
-  boolUpdate : function(boolCond){
-    this.numBool = boolCond;
-  } 
+  buttonID : "lowerCase" 
 };
 
 var upperCase = {
@@ -17,10 +14,7 @@ var upperCase = {
   charBank : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
   bankLength : 26,
   inUse : 0,
-  buttonID : "upperCase",
-  boolUpdate : function(boolCond){
-    this.numBool = boolCond;
-  } 
+  buttonID : "upperCase"
 };
 
 var numeral = {
@@ -28,10 +22,7 @@ var numeral = {
   charBank : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ],
   bankLength : 10,
   inUse : 0,
-  buttonID : "numeral",
-  boolUpdate : function(boolCond){
-    this.numBool = boolCond;
-  } 
+  buttonID : "numeral"  
 };
 
 var special = {
@@ -39,10 +30,7 @@ var special = {
   charBank : ['!', '@', '#', '$', '%', '^', '&', '*', ],
   bankLength : 8,
   inUse : 0,
-  buttonID : "special",
-  boolUpdate : function(boolCond){
-    this.numBool = boolCond;
-  } 
+  buttonID : "special"
 };
 
 var objArray = [lowerCase, upperCase, numeral, special];
@@ -58,6 +46,7 @@ slider.oninput = function(){
   output.innerHTML = this.value;
 };
 
+//updates the generate button color
 var generateButtonColor = function(){
 
   if (lowerCase.numBool === 0 && upperCase.numBool === 0 && numeral.numBool === 0 && special.numBool === 0){
@@ -68,7 +57,7 @@ var generateButtonColor = function(){
   }
 
 };
-
+//updates char button color
 var charButtonColor = function(state, buttonID){
   
   if(state === 1){
@@ -79,6 +68,7 @@ var charButtonColor = function(state, buttonID){
   }
 };
 
+//takes in clicks and passes on command to change button color, update char objects
 buttonToggle = function(charObject){
   
   if (charObject.numBool == 0){
@@ -89,12 +79,12 @@ buttonToggle = function(charObject){
   }
 
   charButtonColor(charObject.numBool, charObject.buttonID);
-  charObject.boolUpdate(charObject.numBool);
   generateButtonColor();
   console.log(charObject.buttonID + ": " + charObject.numBool)
 
 };
 
+//takes input from the HTML and uses it to toggle JS buttons
 charButtonHandler = function(objectName){
 
   if(objectName === "lowerCase"){
@@ -112,38 +102,13 @@ charButtonHandler = function(objectName){
 
 };
 
-var randomChar = function(typeInitial){
-
-  if(typeInitial == "L"){
-    var localIndex = math.floor(math.random * lowerCase.bankLength)
-
-    return lowerCase.charBank[localIndex];
-  }
-  else if(typeInitial == "U"){
-    var localIndex = math.floor(math.random * upperCase.bankLength)
-
-    return upperCase.charBank[localIndex];
-  }
-  else if(typeInitial == "N"){
-    var localIndex = math.floor(math.random * numeral.bankLength)
-
-    return numeral.charBank[localIndex];
-  }
-  else{
-    var localIndex = math.floor(math.random * special.bankLength)
-
-    return special.charBank[localIndex];
-  }
-};
-
 //Determine the quantity of the overall bank of available characters
 var charAvailability = function(){
-  //alert("Entered charAvailability");
   localSum = 0;
   for(var i = 0;i < objArray.length;i++){
     localSum += objArray[i].numBool * objArray[i].bankLength;
   }
-  //alert("charAvailability localSum: " + localSum);
+
   return localSum;
 
 };
@@ -159,9 +124,7 @@ var influenceFunction = function(desired, charsRemaining){
       localInfluenceArray.push((desired[i] - objArray[i].inUse)/charsRemaining);
       console.log("influence function for loop i: " + i);
       console.log("influence function for loop desired[i]: " + desired[i]);
-      //alert("objArray[i].inUse: " + objArray[i].inUse);
-      //alert("charsRemaining: " + charsRemaining);
-      //alert("Influence localInfluenceArray @ index " + i + ": " + (desired[i] - objArray[i].inUse)/charsRemaining);
+
     }
     else{
       localInfluenceArray.push(null);
@@ -251,13 +214,9 @@ var charChoice = function(charsRemaining){
         max = minMax[i]
       }
     }
-    else{
-
-    }
   }
 
   var index = Math.floor((Math.random() * max) + 1);
-
 
   if(index >= minMax[0] && index <= minMax[1]){ //lowerCase
     char = specificChar(lowerCase);
@@ -278,6 +237,7 @@ var charChoice = function(charsRemaining){
   return char;
 
 }
+//uses passed chars to assemble the password
 var generatePassword = function(){
 
   var generatedPassword = "";
@@ -286,19 +246,15 @@ var generatePassword = function(){
 
 
   for(var i = 0;i < charQuantity;i++){
-    
-    if(generatedPassword.length > charQuantity){
-      alert("generatedPassword.length:" + generatedPassword.length);
-      alert("generatedPassword: " + generatedPassword);
-      alert("going past allowance");
-      alert("generatePassword for loop i: " + i);
-    }
+
     generatedPassword += charChoice(charsRemaining);
     charsRemaining--;
+
   }
   return generatedPassword;
 };
 
+//resets char type objects and the html
 var reset = function(){
   for(var i = 0; i < objArray.length;i++){
     objArray[i].inUse = 0;
@@ -310,13 +266,15 @@ var reset = function(){
 
 // Write password to the #password input
 function writePassword() {
-  //alert("Generate Password Pressed");
-  var password = generatePassword();
-  //var passwordText = document.querySelector("#password");
-  alert("Password: " + password);
-  //passwordText.value = password;
-  reset();
   
+  if(lowerCase.numBool === 0 && upperCase.numBool === 0 && numeral.numBool === 0 && special.numBool === 0 ){
+  
+  }
+  else{
+    var password = generatePassword();
+    window.prompt("Password: ", password);
+    reset();
+  }
 
 }
 
