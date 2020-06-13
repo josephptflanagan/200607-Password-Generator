@@ -205,6 +205,21 @@ header {
   cursor: pointer;
 }
 
+footer{
+  text-align: left;
+  margin:auto auto 35px auto;
+  max-width: 800px;
+  padding:5px 25px;
+  background-color: var(--secondary-color);
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+footer p{
+  background-color: var(--secondary-color);
+  color: white;
+}
+
 @media (max-width: 690px) {
   header{
     padding:0 0 5px 0;
