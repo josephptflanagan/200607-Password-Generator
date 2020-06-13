@@ -205,36 +205,6 @@ header {
   cursor: pointer;
 }
 
-button[disabled] {
-  cursor: default;
-  background: #c0c7cf;
-}
-
-.float-right {
-  float: right;
-}
-
-#password {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
-  display: block;
-  width: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 85px;
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
-  resize: none;
-  overflow: hidden;
-}
-
 @media (max-width: 690px) {
   header{
     padding:0 0 5px 0;
@@ -257,11 +227,14 @@ button[disabled] {
     margin: 16px 0px 0px 0px;
     padding: 14px 34px;
   }
-
-  #password {
-    font-size: 1rem;
-  }
   
+  .bth:hover{
+    background-color: none;
+  }
+
+  .bthActive:hover{
+    background-color: none;
+  }
 }
 
 @media (max-width: 500px) {

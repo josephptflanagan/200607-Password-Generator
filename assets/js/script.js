@@ -265,7 +265,7 @@ var reset = function(){
 };
 
 // Write password to the #password input
-function writePassword() {
+var writePassword = function() {
   
   if(lowerCase.numBool === 0 && upperCase.numBool === 0 && numeral.numBool === 0 && special.numBool === 0 ){
   
