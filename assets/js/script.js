@@ -138,28 +138,32 @@ var randomChar = function(typeInitial){
     return special.charBank[localIndex];
   }
 };
+
 //Determine the quantity of the overall bank of available characters
 var charAvailability = function(){
-  alert("Entered charAvailability");
+  //alert("Entered charAvailability");
   localSum = 0;
   for(i=0;i<objArray.length;i++){
     localSum += objArray[i].numBool * objArray[i].bankLength;
   }
-  alert("charAvailability localSum: " + localSum);
+  //alert("charAvailability localSum: " + localSum);
   return localSum;
 
 };
 
 var influenceFunction = function(desired, charsRemaining){
-  alert("Entered influenceFunction, charsRemaining: " + charsRemaining);
+  
   localInfluenceArray = [];
   
-  for(i=0;i<objArray.length;i++){
-    alert("entered influenceFunction for loop");
-    alert("i: " + i + ", ObjArray[i].numBool: " + ObjArray[i].numBool);
+  for(i = 0;i < objArray.length;i++){
+    console.log("i: " + i + ", objArray[i].numBool: " + objArray[i].numBool);
     if(objArray[i].numBool === 1){
       localInfluenceArray.push((desired[i] - objArray[i].inUse)/charsRemaining);
-      alert("Influence localInfluenceArray @ index " + i + ": " + (desired[i] - objArray[i].inUse)/charsRemaining);
+      console.log("influence function for loop i: " + i);
+      console.log("influence function for loop desired[i]: " + desired[i]);
+      //alert("objArray[i].inUse: " + objArray[i].inUse);
+      //alert("charsRemaining: " + charsRemaining);
+      //alert("Influence localInfluenceArray @ index " + i + ": " + (desired[i] - objArray[i].inUse)/charsRemaining);
     }
   }
 
@@ -167,14 +171,14 @@ var influenceFunction = function(desired, charsRemaining){
 };
 
 var desiredProportions = function(){
-  alert("Entered desiredProportions");
+  //alert("Entered desiredProportions");
   var localArray = [];
   var availableChars = charAvailability();
 
-  for (i=0;i<objArray.length;i++){
+  for (var i = 0;i < objArray.length;i++){
     if(objArray[i].numBool === 1){
       localArray.push(Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
-      alert("desiredProportions localArray @ index " + i + ": " + Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
+      console.log("desiredProportions localArray @ index " + i + ": " + Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
     }
   }
 
@@ -184,30 +188,51 @@ var desiredProportions = function(){
 
 //Determine the mins and maxes for each char type based on autorized types and individual type counts compared to summed count of authorized chars
 var minMaxFunction = function(charsRemaining){
-  alert("Entered minMaxFunction");
+
   var localMinMaxArray = [];
   var desiredArray = desiredProportions();
   var influence = influenceFunction(desiredArray, charsRemaining);
   var min = 0;
 
-  for (i=0;i<objArray.length;i++){
+  for(var i = 0;i < influence.length;i++){
+    console.log(influence[i]);
+  }
+
+  for (var i = 0;i < objArray.length;i++){
     
     if(objArray[i].numBool == 1){
       localMinMaxArray.push(min);
+      console.log("i: " + i);
+      console.log("objArray[i].bankLength: " + objArray[i].bankLength);
+      console.log("influence[i]: " + influence[i]);
+      console.log("Math.ceil(objArray[i].bankLength * influence[i]): " + Math.ceil(objArray[i].bankLength * influence[i]));
       min += Math.ceil(objArray[i].bankLength * influence[i]);
+      console.log("current min: " + min);
       localMinMaxArray.push(min-1);
     }
     else{
+      console.log("i: " + i + ", adding null values.");
       localMinMaxArray.push(null);
       localMinMaxArray.push(null);
     }
+  }
+  for(i = 0;i < localMinMaxArray.length;i++){
+    console.log(localMinMaxArray[i]);
   }
   return localMinMaxArray;
 };
 
 var specificChar = function(localObj){
-  var tempIndex = Math.floor((Math.round * localObj.bankLength) + 1)
+  //console.log("accessed specificChar");
+  //console.log("localObj:" + localObj.buttonID);
+  //console.log("localObj.bankLength:" + localObj.bankLength);
+  var tempIndex = Math.floor(Math.random() * localObj.bankLength);
+  console.log("tempIndex:" + tempIndex);
   var char = localObj.charBank[tempIndex];
+  console.log("localObj.charBank[tempIndex]:" + localObj.charBank[tempIndex]);
+  console.log("localObj.inUse: " + localObj.inUse)
+  localObj.inUse += 1;
+  console.log("localObj.inUse: " + localObj.inUse)
   return char;
 };
 
@@ -220,15 +245,19 @@ var charChoice = function(charsRemaining){
 
   for(i=minMax.length-1;i>-1;i--){
     if (minMax[i] != null){
-      max = minMax[i]
+      //console.log("minMax[i]:" + minMax[i])
+      if (minMax[i]>max){
+        max = minMax[i]
+      }
     }
     else{
-      alert("minMax at i: " + i);
+      //alert("minMax at i: " + i);
     }
   }
-  alert("charChoice max: " + max);
-  var index = Math.floor((Math.random * max) + 1);
-  alert("charChoice index: " + index);
+  //alert("charChoice max: " + max);
+  var index = Math.floor((Math.random() * max) + 1);
+  //alert("charChoice index: " + index);
+
   if(index >= minMax[0] && index <= minMax[1]){ //lowerCase
     char = specificChar(lowerCase);
   }
@@ -238,9 +267,13 @@ var charChoice = function(charsRemaining){
   else if(index >= minMax[4] && index <= minMax[5]){ //numeral
     char = specificChar(numeral);
   }
-  else { //special
+  else if(index >= minMax[6] && index <= minMax[7]){ //special
     char = specificChar(special);
   }
+  else{
+    charChoice(charsRemaining);
+  }
+  console.log("char: " + char);
   return char;
 
 }
@@ -251,10 +284,17 @@ var generatePassword = function(){
   var charsRemaining = charQuantity;
   //alert("charsRemaining: " + charQuantity);
 
-  for(i=0;i<charQuantity;i++){
-    alert("password generation index: " + i);
+  for(var i = 0;i < charQuantity;i++){
+    
+    if(generatedPassword.length > charQuantity){
+      alert("generatedPassword.length:" + generatedPassword.length);
+      alert("generatedPassword: " + generatedPassword);
+      alert("going past allowance");
+      alert("generatePassword for loop i: " + i);
+    }
+    //alert("password generation index: " + i);
     generatedPassword += charChoice(charsRemaining);
-    alert("password as is: " + generatedPassword);
+    //alert("password as is: " + generatedPassword);
     charsRemaining--;
   }
   return generatedPassword;
@@ -265,7 +305,7 @@ function writePassword() {
   //alert("Generate Password Pressed");
   var password = generatePassword();
   //var passwordText = document.querySelector("#password");
-  alert(password);
+  alert("Password: " + password);
   //passwordText.value = password;
 
 }
