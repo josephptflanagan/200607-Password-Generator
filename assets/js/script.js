@@ -1,22 +1,54 @@
 // Assignment code here
 var charQuantity = 68;
-var lowerCaseChars = false;
-var upperCaseChars = false;
-var numeralChars = false;
-var specialChars = false;
 
-var lowerNumBool = 0;
-var upperNumBool = 0;
-var numNumBool = 0;
-var specialNumBool = 0;
+var lowerCase = {
+  numBool : 0,
+  charBank : ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+  bankLength : 26,
+  inUse : 0,
+  buttonID : "lowerCase",
+  boolUpdate : function(boolCond){
+    this.numBool = boolCond;
+  } 
+};
 
-var lowerCaseCharBank = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-                         'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var upperCaseCharBank = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
-                         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-var numeralCharBank = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ];
-var specialCharBank = ['!', '@', '#', '$', '%', '^', '&', '*', ];
+var upperCase = {
+  numBool : 0,
+  charBank : ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+  bankLength : 26,
+  inUse : 0,
+  buttonID : "upperCase",
+  boolUpdate : function(boolCond){
+    this.numBool = boolCond;
+  } 
+};
 
+var numeral = {
+  numBool : 0,
+  charBank : ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ],
+  bankLength : 10,
+  inUse : 0,
+  buttonID : "numeral",
+  boolUpdate : function(boolCond){
+    this.numBool = boolCond;
+  } 
+};
+
+var special = {
+  numBool : 0,
+  charBank : ['!', '@', '#', '$', '%', '^', '&', '*', ],
+  bankLength : 8,
+  inUse : 0,
+  buttonID : "special",
+  boolUpdate : function(boolCond){
+    this.numBool = boolCond;
+  } 
+};
+
+var objArray = [lowerCase, upperCase, numeral, special];
+
+// Get references
+var generateBtn = document.querySelector("#generate");
 var slider = document.getElementById("charCount");
 var output = document.getElementById("sliderReadout");
 output.innerHTML = slider.value;
@@ -24,229 +56,217 @@ output.innerHTML = slider.value;
 slider.oninput = function(){
   charQuantity = this.value;
   output.innerHTML = this.value;
-}
+};
 
-var buttonColor = function(){
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
 
-  if (lowerCaseChars == false && upperCaseChars == false && numeralChars == false && specialChars == false){
-    document.getElementById("generate").style.background = "rgb(128,0,0)";
+var generateButtonColor = function(){
+
+  if (lowerCase.numBool === 0 && upperCase.numBool === 0 && numeral.numBool === 0 && special.numBool === 0){
+    document.getElementById("generate").className = "btn";
   }
   else{
-    document.getElementById("generate").style.background = "rgb(50,204,0)";
+    document.getElementById("generate").className = "btnActive";
   }
 
-}
+};
 
 var charButtonColor = function(state, buttonID){
   
-  if(state){
-    document.getElementById(buttonID).style.background = "rgb(140, 255, 102)";
-    document.getElementById(buttonID).style.color = "rgb(0, 0, 0)";
+  if(state === 1){
+    document.getElementById(buttonID).className = "charButtonActive";
   }
   else{
-    document.getElementById(buttonID).style.background = "rgb(20, 20, 57)";
-    document.getElementById(buttonID).style.color = "rgb(255, 255, 255)";
+    document.getElementById(buttonID).className = "charButton";
   }
-}
+};
 
-lowerCaseFunction = function(){
-
-  if (lowerCaseChars == false){
-    lowerCaseChars = true;
-    lowerNumBool = 1;
-    charButtonColor(lowerCaseChars, "lowerCase");
-  }
-  else{
-    lowerCaseChars = false;
-    lowerNumBool = 0;
-    charButtonColor(lowerCaseChars, "lowerCase");
-  }
+buttonToggle = function(charObject){
   
-  buttonColor();
-  console.log("lowerCaseChars: " + lowerCaseChars)
-}
-
-upperCaseFunction = function(){
-
-  if (upperCaseChars == false){
-    upperCaseChars = true;
-    upperNumBool = 1;
-    charButtonColor(upperCaseChars, "upperCase");
+  if (charObject.numBool == 0){
+    charObject.numBool = 1;
   }
   else{
-    upperCaseChars = false;
-    upperNumBool = 0;
-    charButtonColor(upperCaseChars, "upperCase");
-  }
-  
-  buttonColor();
-  console.log("upperCaseChars: " + upperCaseChars)
-}
-
-numeralFunction = function(){
-  
-  if (numeralChars == false){
-    numeralChars = true;
-    numNumBool = 1;
-    charButtonColor(numeralChars, "numeral");
-  }
-  else{
-    numeralChars = false;
-    numNumBool = 0;
-    charButtonColor(numeralChars, "numeral");
+    charObject.numBool = 0;
   }
 
-  buttonColor();
-  console.log("numeralChars: " + numeralChars)
-}
+  charButtonColor(charObject.numBool, charObject.buttonID);
+  charObject.boolUpdate(charObject.numBool);
+  generateButtonColor();
+  console.log(charObject.buttonID + ": " + charObject.numBool)
 
-specialCharFunction = function(){
-  
-  if (specialChars == false){
-    specialChars = true;
-    specialNumBool = 1;
-    charButtonColor(specialChars, "specialChar");
+};
+
+charButtonHandler = function(objectName){
+
+  if(objectName === "lowerCase"){
+    buttonToggle(lowerCase);
+  }
+  else if(objectName === "upperCase"){
+    buttonToggle(upperCase);
+  }
+  else if(objectName === "numeral"){
+    buttonToggle(numeral);
   }
   else{
-    specialChars = false;
-    specialNumBool = 0;
-    charButtonColor(specialChars, "specialChar");
+    buttonToggle(special);
   }
 
-  buttonColor();
-  console.log("specialChars: " + specialChars)
-}
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+};
 
 var randomChar = function(typeInitial){
 
   if(typeInitial == "L"){
-    var localIndex = math.floor(math.random * lowerCaseCharBank.length)
+    var localIndex = math.floor(math.random * lowerCase.bankLength)
 
-    return lowerCaseCharBank[localIndex];
+    return lowerCase.charBank[localIndex];
   }
   else if(typeInitial == "U"){
-    var localIndex = math.floor(math.random * upperCaseCharBank.length)
+    var localIndex = math.floor(math.random * upperCase.bankLength)
 
-    return upperCaseCharBank[localIndex];
+    return upperCase.charBank[localIndex];
   }
   else if(typeInitial == "N"){
-    var localIndex = math.floor(math.random * numeralCharBank.length)
+    var localIndex = math.floor(math.random * numeral.bankLength)
 
-    return numeralCharBank[localIndex];
+    return numeral.charBank[localIndex];
   }
   else{
-    var localIndex = math.floor(math.random * specialCharBank.length)
+    var localIndex = math.floor(math.random * special.bankLength)
 
-    return specialCharBank[localIndex];
+    return special.charBank[localIndex];
   }
-}
-
+};
+//Determine the quantity of the overall bank of available characters
 var charAvailability = function(){
+  alert("Entered charAvailability");
+  localSum = 0;
+  for(i=0;i<objArray.length;i++){
+    localSum += objArray[i].numBool * objArray[i].bankLength;
+  }
+  alert("charAvailability localSum: " + localSum);
+  return localSum;
 
-  return lowerNumBool * lowerCaseCharBank.length + upperNumBool * upperCaseCharBank.length + numNumBool * numeralCharBank.length + specialNumBool * specialCharBank.length;
+};
 
-}
+var influenceFunction = function(desired, charsRemaining){
+  alert("Entered influenceFunction, charsRemaining: " + charsRemaining);
+  localInfluenceArray = [];
+  
+  for(i=0;i<objArray.length;i++){
+    alert("entered influenceFunction for loop");
+    alert("i: " + i + ", ObjArray[i].numBool: " + ObjArray[i].numBool);
+    if(objArray[i].numBool === 1){
+      localInfluenceArray.push((desired[i] - objArray[i].inUse)/charsRemaining);
+      alert("Influence localInfluenceArray @ index " + i + ": " + (desired[i] - objArray[i].inUse)/charsRemaining);
+    }
+  }
 
-var typeAvailability = function(){
+  return localInfluenceArray;
+};
 
+var desiredProportions = function(){
+  alert("Entered desiredProportions");
   var localArray = [];
+  var availableChars = charAvailability();
 
-  if (lowerCaseChars == true){
-    localArray.push('L');
-  }
-
-  if(upperCaseChars == true){
-    localArray.push('U');
-  }
-
-  if(numeralChars == true){
-    localArray.push('N');
-  }
-
-  if(specialChars == true){
-    localArray.push('S');
+  for (i=0;i<objArray.length;i++){
+    if(objArray[i].numBool === 1){
+      localArray.push(Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
+      alert("desiredProportions localArray @ index " + i + ": " + Math.ceil((objArray[i].bankLength / availableChars) * charQuantity));
+    }
   }
 
   return localArray;
 
-}
+};
 
 //Determine the mins and maxes for each char type based on autorized types and individual type counts compared to summed count of authorized chars
-var desiredProportions = function(){
-  
-  var minMaxArray = [];
+var minMaxFunction = function(charsRemaining){
+  alert("Entered minMaxFunction");
+  var localMinMaxArray = [];
+  var desiredArray = desiredProportions();
+  var influence = influenceFunction(desiredArray, charsRemaining);
   var min = 0;
-  var typeArray = typeAvailability();
 
-  for (i=0;i<typeArray.length;i++){
+  for (i=0;i<objArray.length;i++){
     
-    if(typeArray.indexOf('L') != -1){
-      minMaxArray.push(min);
-      min += 26;
-      minMaxArray.push(min-1);
+    if(objArray[i].numBool == 1){
+      localMinMaxArray.push(min);
+      min += Math.ceil(objArray[i].bankLength * influence[i]);
+      localMinMaxArray.push(min-1);
     }
-
-    if(typeArray.indexOf('U') != -1){
-      minMaxArray.push(min);
-      min += 26;
-      minMaxArray.push(min-1);
+    else{
+      localMinMaxArray.push(null);
+      localMinMaxArray.push(null);
     }
-
-    if(typeArray.indexOf('N') != -1){
-      minMaxArray.push(min);
-      min += 10;
-      minMaxArray.push(min-1);
-    }
-
-    if(typeArray.indexOf('S') != -1){
-      minMaxArray.push(min);
-      min += 8;
-      minMaxArray.push(min-1);
-    }
-
   }
+  return localMinMaxArray;
+};
 
-
-
-
-
-}
+var specificChar = function(localObj){
+  var tempIndex = Math.floor((Math.round * localObj.bankLength) + 1)
+  var char = localObj.charBank[tempIndex];
+  return char;
+};
 
 //using predetermined mins, maxes, and an index, find and return a specific char to add to the password
-var charChoice = function(localIndex){
+var charChoice = function(charsRemaining){
+  //alert("charChoice Entered, charsRemaining: " + charsRemaining);
+  var char = "";
+  var minMax = minMaxFunction(charsRemaining);
+  var max = 0;
 
-  var minMax = desiredProportions();
+  for(i=minMax.length-1;i>-1;i--){
+    if (minMax[i] != null){
+      max = minMax[i]
+    }
+    else{
+      alert("minMax at i: " + i);
+    }
+  }
+  alert("charChoice max: " + max);
+  var index = Math.floor((Math.random * max) + 1);
+  alert("charChoice index: " + index);
+  if(index >= minMax[0] && index <= minMax[1]){ //lowerCase
+    char = specificChar(lowerCase);
+  }
+  else if(index >= minMax[2] && index <= minMax[3]){ //upperCase
+    char = specificChar(upperCase);
+  }
+  else if(index >= minMax[4] && index <= minMax[5]){ //numeral
+    char = specificChar(numeral);
+  }
+  else { //special
+    char = specificChar(special);
+  }
+  return char;
 
 }
 var generatePassword = function(){
+  //alert("Generate Password Entered");
   var generatedPassword = "";
-
-
+  
+  var charsRemaining = charQuantity;
+  //alert("charsRemaining: " + charQuantity);
 
   for(i=0;i<charQuantity;i++){
-    var index = Math.floor(Math.random * charAvailability());
-
-    charChoice(index);
+    alert("password generation index: " + i);
+    generatedPassword += charChoice(charsRemaining);
+    alert("password as is: " + generatedPassword);
+    charsRemaining--;
   }
-  
-
-
-
+  return generatedPassword;
 }
 
 // Write password to the #password input
 function writePassword() {
+  //alert("Generate Password Pressed");
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  //var passwordText = document.querySelector("#password");
+  alert(password);
+  //passwordText.value = password;
 
 }
 
-
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);

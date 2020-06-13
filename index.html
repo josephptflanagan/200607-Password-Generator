@@ -24,18 +24,18 @@
             <p class="card-heading">Character Types</p>
           </div>
           <div class="card-body">
-                <button id="lowerCase" class="charButton" onclick="lowerCaseFunction()">Lower Case</button>
+                <button id="lowerCase" class="charButton" onclick="charButtonHandler('lowerCase')">Lower Case (a to z)</button>
 
-                <button id="upperCase" class="charButton" onclick="upperCaseFunction()">Upper Case</button>
+                <button id="upperCase" class="charButton" onclick="charButtonHandler('upperCase')">Upper Case (A to Z)</button>
 
-                <button id="numeral" class="charButton" onclick="numeralFunction()">Numerals</button>
+                <button id="numeral" class="charButton" onclick="charButtonHandler('numeral')">Numerals (0 to 9)</button>
 
-                <button id="specialChar" class="charButton" onclick="specialCharFunction()">Special Characters</button>
+                <button id="special" class="charButton" onclick="charButtonHandler('special')">Special Characters (! to *)</button>
           </div>
         </div>
         <div class="card">
           <div class="card-footer">
-            <button id="generate" class="btn">Generate Password</button>
+            <button id="generate" class="btn" onclick="writePassword()">Generate Password</button>
           </div>
         </div>
       </div>

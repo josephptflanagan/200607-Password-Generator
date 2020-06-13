@@ -1,7 +1,7 @@
 :root{
   --primary-color: #cc7a00;
   --secondary-color: #141439;
-  --green: #00cc00;
+  --green: #8cff66;
   --red: #800000;
 }
 
@@ -71,14 +71,6 @@ header {
   font-weight: bold;
 }
 
-.card-header::after {
-  content: " ";
-  display: block;
-  width: 100%;
-  background: #e7e9eb;
-  height: 2px;
-}
-
 .card-body {
   min-height: 100px;
   background-color: var(--secondary-color);
@@ -141,16 +133,32 @@ header {
   background-color: var(--secondary-color);
   border: 2px solid white;
   border-radius: 10px;
+  box-shadow: 0px 2px 8px lavender;
   padding:20px;
   font-size: 25px;
   margin: 10px auto 0 auto;
   width: 100%;
   text-align: center;
+  transition-duration: .4s;
 }
 
 .charButton:hover{
   color: black;
-  background-color: #c6ffb3;
+  background-color: var(--green);
+  transition-duration: .4s;
+}
+
+.charButtonActive{
+  color: black;
+  background-color: var(--green);
+  border: 2px solid goldenrod;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px palegoldenrod;
+  padding:20px;
+  font-size: 25px;
+  margin: 10px auto 0 auto;
+  width: 100%;
+  text-align: center;
   transition-duration: .4s;
 }
 
@@ -173,6 +181,21 @@ header {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
   color: hsl(0, 0%, 100%);
+  display: inline-block;
+  font-size: 22px;
+  line-height: 22px;
+  margin: 16px 16px 16px 20px;
+  padding: 14px 34px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btnActive {
+  border: none;
+  background-color: #8cff66;
+  border-radius: 25px;
+  box-shadow: 2px 2px 8px palegoldenrod;
+  color: black;
   display: inline-block;
   font-size: 22px;
   line-height: 22px;
