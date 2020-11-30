@@ -1,10 +1,10 @@
 # Password Generator
 
 ## Github Repository
-https://github.com/josephptflanagan/200607-Password-Generator
+[Repository](https://github.com/josephptflanagan/Password-Generator)
 
 ## Site URL
-https://josephptflanagan.github.io/200607-Password-Generator/
+[Site](https://josephptflanagan.github.io/Password-Generator/)
 
 ## Screenshot
 https://github.com/josephptflanagan/200607-Password-Generator/blob/master/assets/img/screenshot.jpg
